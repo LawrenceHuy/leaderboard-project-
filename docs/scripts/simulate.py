@@ -5,6 +5,7 @@ from concurrent.futures import ThreadPoolExecutor
 p = argparse.ArgumentParser()
 p.add_argument("--players", type=int, default=1000)
 p.add_argument("--rounds", type=int, default=5)
+p.add_argument("--threads", type=int, default=20)
 a = p.parse_args()
 
 ddb = boto3.resource("dynamodb", region_name="us-east-1")
@@ -20,7 +21,7 @@ def update(pid):
 
 start = time.time()
 for r in range(a.rounds):
-    with ThreadPoolExecutor(20) as ex:
+    with ThreadPoolExecutor(a.threads) as ex:
         list(ex.map(update, list(scores)))
     print(f"round {r+1}/{a.rounds} done")
     time.sleep(1)
