@@ -1,0 +1,178 @@
+# KẾ HOẠCH TUẦN 4 – LEADERBOARD SERVERLESS AWS
+
+## 1. Thông tin chung
+
+- **Dự án:** Leaderboard Serverless trên AWS
+- **Tuần thực hiện:** Tuần 4
+- **Thành viên:**
+  - Cao Gia Huy
+  - Hiếu Nghĩa
+
+## 2. Mục tiêu tuần 4
+
+- Hoàn thiện kiểm thử tích hợp hệ thống Leaderboard Serverless trên AWS.
+- Kiểm tra cơ chế xử lý xung đột dữ liệu và ghi log trong Lambda.
+- Đánh giá hiệu năng hệ thống với các mức tải khác nhau.
+- Kiểm tra cấu hình CORS, API throttling và hoạt động của website.
+- Hoàn thiện giám sát hệ thống bằng CloudWatch.
+- Hoàn thiện báo cáo, sắp xếp minh chứng và cập nhật mã nguồn lên GitHub.
+- Kiểm tra và dọn dẹp tài nguyên AWS sau khi hoàn thành kiểm thử.
+
+## 3. Kế hoạch công việc chi tiết
+
+### 3.1. Cao Gia Huy
+
+#### Công việc 1: Kiểm tra và xử lý lỗi Lambda
+
+- **Nội dung:** Kiểm tra lỗi `ConditionalCheckFailedException` trong Lambda `stream_processor`.
+- **Cách thực hiện:** Rà soát xử lý ngoại lệ, kiểm tra log và xác minh cơ chế retry khi xảy ra xung đột dữ liệu.
+- **Kết quả dự kiến:** Xác định nguyên nhân lỗi và xác minh log ghi nhận đúng các lần xảy ra xung đột.
+- **Minh chứng cần lưu:** Log CloudWatch, thông tin lỗi và kết quả kiểm thử.
+
+#### Công việc 2: Kiểm thử hiệu năng simulator
+
+- **Nội dung:** Chạy benchmark với 20 và 50 threads trong cùng điều kiện kiểm thử.
+- **Cách thực hiện:** Chạy simulator, ghi nhận thời gian bắt đầu và kết thúc, thời gian ghi dữ liệu, độ trễ và kết quả leaderboard.
+- **Kết quả dự kiến:** Có số liệu so sánh hiệu năng giữa các mức tải.
+- **Minh chứng cần lưu:** Output simulator và bảng tổng hợp số liệu benchmark.
+
+#### Công việc 3: Kiểm thử tải hệ thống
+
+- **Nội dung:** Thực hiện kiểm thử với 1.000 người chơi, mỗi người chơi 5 vòng.
+- **Cách thực hiện:** Chạy simulator và đối chiếu dữ liệu được ghi nhận với kết quả leaderboard.
+- **Kết quả dự kiến:** Xác minh tính nhất quán của dữ liệu và ghi nhận các lỗi phát sinh.
+- **Minh chứng cần lưu:** Kết quả simulator, dữ liệu leaderboard và log liên quan.
+
+#### Công việc 4: Kiểm tra CloudWatch và log retention
+
+- **Nội dung:** Kiểm tra thời gian lưu log 7 ngày và các chỉ số giám sát hệ thống.
+- **Cách thực hiện:** Kiểm tra `Invocations`, `Errors`, `Throttles`, `Duration` và `ConcurrentExecutions`; đối chiếu thời điểm chạy với log thực tế.
+- **Kết quả dự kiến:** Xác minh log và metric phản ánh đúng hoạt động của hệ thống.
+- **Minh chứng cần lưu:** Ảnh CloudWatch, log và kết quả truy vấn theo khoảng thời gian kiểm thử.
+
+#### Công việc 5: Kiểm tra scripts triển khai và dọn dẹp
+
+- **Nội dung:** Rà soát và kiểm thử `deploy.sh`, `cleanup.sh`.
+- **Cách thực hiện:** Thực hiện triển khai, kiểm tra các tài nguyên được tạo và chạy quy trình dọn dẹp sau khi hoàn tất.
+- **Kết quả dự kiến:** Ghi nhận khả năng triển khai và dọn dẹp, bao gồm cả các lỗi do giới hạn tài khoản AWS nếu có.
+- **Minh chứng cần lưu:** Output terminal và kết quả kiểm tra tài nguyên AWS.
+
+### 3.2. Hiếu Nghĩa
+
+#### Công việc 1: Kiểm thử CORS
+
+- **Nội dung:** Kiểm tra CORS với origin hợp lệ và origin không hợp lệ.
+- **Cách thực hiện:** Gửi các yêu cầu kiểm thử và đối chiếu header phản hồi với cấu hình CORS.
+- **Kết quả dự kiến:** Xác minh chính sách CORS theo cấu hình của hệ thống.
+- **Minh chứng cần lưu:** Output lệnh kiểm thử và header HTTP phản hồi.
+
+#### Công việc 2: Kiểm thử API throttling
+
+- **Nội dung:** Kiểm tra cơ chế giới hạn số lượng yêu cầu tới API.
+- **Cách thực hiện:** Gửi yêu cầu theo các mức tải phù hợp và kiểm tra phản hồi khi vượt giới hạn.
+- **Kết quả dự kiến:** Xác minh API trả về HTTP `429` khi đạt điều kiện throttling.
+- **Minh chứng cần lưu:** Output kiểm thử, mã trạng thái HTTP và cấu hình throttling.
+
+#### Công việc 3: Kiểm tra website và API
+
+- **Nội dung:** Kiểm tra S3 bucket policy, website và khả năng kết nối tới API.
+- **Cách thực hiện:** Truy cập website, gọi API và kiểm tra phản hồi thực tế.
+- **Kết quả dự kiến:** Xác nhận các thành phần hoạt động theo cấu hình đã triển khai.
+- **Minh chứng cần lưu:** Ảnh website, kết quả gọi API và thông tin cấu hình liên quan.
+
+#### Công việc 4: Hoàn thiện test case tích hợp
+
+- **Nội dung:** Rà soát và hoàn thiện các test case của hệ thống.
+- **Cách thực hiện:** Kiểm tra từng trường hợp, ghi nhận kết quả PASS/FAIL và lưu thông tin lỗi nếu phát sinh.
+- **Kết quả dự kiến:** Có danh sách test case với kết quả và minh chứng tương ứng.
+- **Minh chứng cần lưu:** Danh sách test case, output kiểm thử và ảnh chụp màn hình.
+
+#### Công việc 5: Hoàn thiện báo cáo và cập nhật GitHub
+
+- **Nội dung:** Tổng hợp kết quả kiểm thử, hoàn thiện báo cáo và sắp xếp tài liệu trong repository.
+- **Cách thực hiện:** Rà soát nội dung báo cáo, kiểm tra scripts, hình ảnh minh chứng và khai báo sử dụng AI.
+- **Kết quả dự kiến:** Báo cáo và tài liệu dự án được cập nhật đầy đủ theo cấu trúc repository.
+- **Minh chứng cần lưu:** Báo cáo hoàn thiện, danh sách tệp đã cập nhật và lịch sử commit GitHub.
+
+### 3.3. Công việc chung
+
+#### Công việc 1: Rà soát và xác minh kết quả
+
+- Đối chiếu kết quả kiểm thử với yêu cầu của dự án.
+- Xác minh nguyên nhân các lỗi phát sinh và ghi lại thông báo lỗi nguyên văn.
+- Không đánh dấu PASS đối với các trường hợp chưa có kết quả kiểm thử xác nhận.
+
+#### Công việc 2: Rà soát mã nguồn và tài liệu
+
+- Kiểm tra cấu trúc repository và vị trí lưu scripts, báo cáo, hình ảnh.
+- Rà chéo nội dung để cả hai thành viên có thể giải thích kiến trúc và cấu hình hệ thống.
+- Bổ sung các kết quả kiểm thử còn thiếu vào báo cáo.
+
+#### Công việc 3: Dọn dẹp tài nguyên AWS
+
+- Chạy `cleanup.sh` sau khi đã hoàn thành và lưu các minh chứng cần thiết.
+- Kiểm tra tài nguyên còn tồn tại thuộc dự án Leaderboard.
+- Ghi nhận mức sử dụng ngân sách Learner Lab theo số liệu thực tế.
+- Lưu lại các lỗi dọn dẹp hoặc giới hạn quyền nếu phát sinh.
+
+## 4. Tiến độ dự kiến
+
+### Đầu tuần
+
+- [ ] Rà soát lỗi Lambda và log CloudWatch.
+- [ ] Kiểm tra cấu hình log retention.
+- [ ] Chuẩn bị môi trường và điều kiện benchmark.
+
+### Giữa tuần
+
+- [ ] Chạy simulator với 20 và 50 threads.
+- [ ] Thực hiện kiểm thử tải với 1.000 người chơi, mỗi người chơi 5 vòng.
+- [ ] Kiểm thử CORS và API throttling.
+- [ ] Kiểm tra website, API và các chỉ số CloudWatch.
+- [ ] Tổng hợp kết quả kiểm thử và minh chứng.
+
+### Cuối tuần
+
+- [ ] Hoàn thiện các test case tích hợp.
+- [ ] Hoàn thiện báo cáo và rà chéo nội dung.
+- [ ] Cập nhật mã nguồn, scripts và hình ảnh lên GitHub.
+- [ ] Chạy cleanup và xác minh tài nguyên AWS còn tồn tại.
+- [ ] Ghi nhận mức sử dụng ngân sách Learner Lab.
+
+## 5. Tiêu chí hoàn thành
+
+- [ ] Đã kiểm tra cơ chế xử lý xung đột dữ liệu và log Lambda.
+- [ ] Đã thu thập số liệu benchmark ở các mức tải được lên kế hoạch.
+- [ ] Đã kiểm tra log retention, metric và cảnh báo CloudWatch.
+- [ ] Đã kiểm thử CORS và API throttling.
+- [ ] Đã kiểm tra website và API.
+- [ ] Đã cập nhật kết quả test case cùng minh chứng thực tế.
+- [ ] Đã hoàn thiện báo cáo và cập nhật repository GitHub.
+- [ ] Đã chạy cleanup và kiểm tra tài nguyên AWS.
+- [ ] Đã ghi nhận mức sử dụng ngân sách theo kết quả thực tế.
+
+## 6. Rủi ro và phương án xử lý
+
+### Rủi ro 1: Lambda phát sinh lỗi khi xử lý đồng thời
+
+- **Phương án:** Kiểm tra log, request ID và cơ chế retry; ghi lại nguyên văn lỗi để xác minh nguyên nhân.
+
+### Rủi ro 2: Kết quả benchmark không ổn định
+
+- **Phương án:** Chạy lại trong cùng điều kiện, ghi nhận nhiều lần đo và tách thời gian phía client với phía server.
+
+### Rủi ro 3: CloudWatch không ghi nhận dữ liệu như dự kiến
+
+- **Phương án:** Kiểm tra log group, metric, khoảng thời gian truy vấn và cấu hình cảnh báo.
+
+### Rủi ro 4: Không thể cấu hình một số tài nguyên do giới hạn Learner Lab
+
+- **Phương án:** Ghi nhận thông báo lỗi thực tế, đánh giá ảnh hưởng và nêu rõ giới hạn trong báo cáo.
+
+### Rủi ro 5: Còn tài nguyên AWS sau khi kiểm thử
+
+- **Phương án:** Chạy cleanup script, kiểm tra lại các tài nguyên thuộc dự án và ghi nhận những tài nguyên không thể xóa nếu có.
+
+## 7. Lưu ý
+
+Đây là kế hoạch công việc dự kiến cho tuần 4. Trạng thái hoàn thành, số liệu benchmark, kết quả PASS/FAIL, lỗi phát sinh và mức sử dụng ngân sách phải được cập nhật dựa trên kết quả thực tế. Không sử dụng số liệu giả định để thay thế kết quả kiểm thử.
