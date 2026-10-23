@@ -1,0 +1,121 @@
+# WORKLOG TUẦN 3 – LEADERBOARD SERVERLESS AWS
+
+## 1. Thông tin chung
+
+- **Dự án:** Leaderboard Serverless trên AWS
+- **Tuần thực hiện:** Tuần 3
+- **Thành viên:**
+  - Cao Gia Huy
+  - Hiếu Nghĩa
+
+## 2. Nhật ký công việc
+
+### 2.1. Cao Gia Huy
+
+#### Công việc 1: Kiểm tra và xử lý log xung đột
+
+- **Nội dung:** Kiểm tra và xử lý `ConditionalCheckFailedException` trong Lambda `stream_processor`.
+- **Kết quả:** Ghi nhận lỗi và kiểm tra log theo thời điểm chạy.
+- **Minh chứng:** Log CloudWatch và thông tin lỗi phát sinh.
+- **Thời gian:** Điền theo thực tế.
+
+#### Công việc 2: Kiểm thử simulator
+
+- **Nội dung:** Kiểm thử simulator với các mức tải khác nhau, bao gồm 20 và 50 threads.
+- **Kết quả:** Thu thập thời gian chạy, độ trễ và kết quả benchmark.
+- **Minh chứng:** Kết quả chạy simulator và bảng số liệu hiệu năng.
+- **Thời gian:** Điền theo thực tế.
+
+#### Công việc 3: Kiểm thử tải hệ thống
+
+- **Nội dung:** Thực hiện kiểm thử với 1.000 người chơi, mỗi người chơi 5 vòng.
+- **Kết quả:** Ghi nhận kết quả chạy và đối chiếu dữ liệu leaderboard.
+- **Minh chứng:** Kết quả simulator và dữ liệu leaderboard sau kiểm thử.
+- **Thời gian:** Điền theo thực tế.
+
+#### Công việc 4: Kiểm tra CloudWatch
+
+- **Nội dung:** Kiểm tra log retention và các chỉ số CloudWatch.
+- **Kết quả:** Kiểm tra các chỉ số `Errors`, `Throttles`, `Duration` và những chỉ số liên quan.
+- **Minh chứng:** Log, metric và trạng thái cảnh báo CloudWatch.
+- **Thời gian:** Điền theo thực tế.
+
+#### Công việc 5: Kiểm tra scripts AWS
+
+- **Nội dung:** Kiểm tra scripts triển khai và dọn dẹp tài nguyên AWS.
+- **Kết quả:** Ghi nhận kết quả chạy `deploy.sh`, `cleanup.sh` và các lỗi nếu có.
+- **Minh chứng:** Output terminal và trạng thái tài nguyên AWS.
+- **Thời gian:** Điền theo thực tế.
+
+### 2.2. Hiếu Nghĩa
+
+#### Công việc 1: Triển khai và kiểm thử AWS
+
+- **Nội dung:** Triển khai và kiểm thử hệ thống trên tài khoản AWS được phân công.
+- **Kết quả:** Ghi nhận kết quả triển khai và các vấn đề phát sinh.
+- **Minh chứng:** Ảnh chụp màn hình và output triển khai.
+- **Thời gian:** Điền theo thực tế.
+
+#### Công việc 2: Kiểm thử website và API
+
+- **Nội dung:** Kiểm thử hoạt động của website và API.
+- **Kết quả:** Ghi nhận phản hồi HTTP và kết quả kiểm thử tích hợp.
+- **Minh chứng:** Ảnh giao diện website, kết quả gọi API và mã phản hồi HTTP.
+- **Thời gian:** Điền theo thực tế.
+
+#### Công việc 3: Kiểm tra bảo mật
+
+- **Nội dung:** Kiểm tra cấu hình CORS và API throttling.
+- **Kết quả:** Ghi nhận cấu hình và kết quả kiểm thử thực tế.
+- **Minh chứng:** Kết quả kiểm tra origin và phản hồi API khi vượt giới hạn.
+- **Thời gian:** Điền theo thực tế.
+
+#### Công việc 4: Tổng hợp minh chứng
+
+- **Nội dung:** Tổng hợp kết quả kiểm thử và hình ảnh minh chứng.
+- **Kết quả:** Sắp xếp tài liệu, ảnh chụp và kết quả kiểm thử vào repository.
+- **Minh chứng:** Các tệp báo cáo, scripts và hình ảnh trong GitHub.
+- **Thời gian:** Điền theo thực tế.
+
+#### Công việc 5: Hoàn thiện báo cáo tuần 3
+
+- **Nội dung:** Soạn thảo, hoàn thiện báo cáo tuần 3 và rà soát nội dung.
+- **Kết quả:** Tổng hợp tiến độ, hạn chế và các lỗi phát sinh trong quá trình thực hiện.
+- **Minh chứng:** Báo cáo tuần 3 và các phụ lục liên quan.
+- **Thời gian:** Điền theo thực tế.
+
+## 3. Tổng kết tuần 3
+
+### 3.1. Công việc đã thực hiện
+
+- Tiếp tục hoàn thiện và kiểm thử hệ thống Leaderboard Serverless trên AWS.
+- Kiểm tra cơ chế xử lý dữ liệu, log và khả năng giám sát hệ thống.
+- Thực hiện kiểm thử hiệu năng với simulator.
+- Kiểm tra cấu hình bảo mật, API và website.
+- Tổng hợp kết quả, hình ảnh minh chứng và nội dung báo cáo.
+
+### 3.2. Công việc cần tiếp tục
+
+- [ ] Xác minh các lỗi và kết quả kiểm thử còn chưa đầy đủ.
+- [ ] Hoàn thiện benchmark và đối chiếu thời gian xử lý phía client với phía server.
+- [ ] Kiểm tra cảnh báo CloudWatch và cấu hình log retention.
+- [ ] Hoàn thiện kiểm thử CORS, throttling và các test case tích hợp.
+- [ ] Rà soát scripts triển khai, dọn dẹp tài nguyên AWS và cập nhật repository.
+
+## 4. Thời gian thực hiện
+
+### Cao Gia Huy
+
+- **Tổng số giờ:** 12 giờ.
+
+### Hiếu Nghĩa
+
+- **Tổng số giờ:** 12 giờ.
+
+> **Lưu ý:** Số giờ cần phản ánh thời gian làm việc thực tế của từng thành viên. Điều chỉnh nếu nhật ký thực tế khác với số liệu trên.
+
+## 5. Khai báo sử dụng AI
+
+Nhóm sử dụng công cụ AI để hỗ trợ giải thích, đề xuất code hoặc lệnh CLI và tổ chức nội dung báo cáo trong phạm vi phù hợp với quá trình làm việc thực tế. Nhóm chịu trách nhiệm tự thực hiện thao tác trên AWS/GitHub, chạy thử nghiệm, thu thập minh chứng và kiểm tra tính chính xác của kết quả.
+
+Nội dung khai báo cần được điều chỉnh để phản ánh đúng cách nhóm đã sử dụng AI trong tuần 3.
