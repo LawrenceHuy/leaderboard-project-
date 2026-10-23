@@ -50,5 +50,6 @@ def lambda_handler(event, context):
         except ClientError as e:
             if e.response["Error"]["Code"] != "ConditionalCheckFailedException":
                 raise
+            log.warning("ConditionalCheckFailed attempt=%d players=%d", attempt + 1, len(latest))
             time.sleep(0.05 * 2 ** attempt)
     raise RuntimeError("Khong ghi duoc Leaderboard sau nhieu lan thu")
