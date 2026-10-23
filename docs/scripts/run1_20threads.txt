@@ -1,0 +1,14 @@
+round 1/5 done
+round 2/5 done
+round 3/5 done
+round 4/5 done
+round 5/5 done
+Threads         : 20
+Tong so lan ghi : 5000
+Thoi gian ghi   : 14.9s (phia client)
+Do tre moi lan ghi: TB 33ms, p95 63ms, max 1168ms
+Lambda xu ly them sau khi ghi xong: 7.1s
+Version cuoi    : 505
+Expected: [('player0800', 2280), ('player0102', 2143), ('player0819', 2118)] ...
+Actual  : [('player0800', 2280), ('player0102', 2143), ('player0819', 2118)] ...
+MATCH
