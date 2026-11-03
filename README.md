@@ -5,7 +5,7 @@ Bảng xếp hạng game thời gian thực **serverless** trên AWS, dùng **Dy
 
 Thành viên: Cao Gia Huy (24110018), Nguyễn Nhân Hiếu Nghĩa (24110035).
 
-Video demo: _[dán link video tại đây]_
+Video demo: (https://youtu.be/mhYU4IjFiFs)
 
 ## Kiến trúc
 
